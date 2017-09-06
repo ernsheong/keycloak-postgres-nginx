@@ -8,6 +8,17 @@ volumes:
     keycloak-nginx-ssl:
 
 services:
+  postgres:
+    image: postgres:9.6-alpine
+    container_name: postgres
+    networks:
+      - keycloak-network
+    volumes:
+      - keycloak-postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=password
   keycloak:
     image: jboss/keycloak-postgres
     container_name: keycloak
@@ -22,6 +33,7 @@ services:
       - PROXY_ADDRESS_FORWARDING=true
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
+      - POSTGRES_JDBC_VERSION=42.1.4
   nginx:
     image: ernsheong/keycloak-nginx
     container_name: nginx
