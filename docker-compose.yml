@@ -20,3 +20,6 @@ services:
       - POSTGRES_USER=keycloak
       - POSTGRES_PASSWORD=keycloak
       - PROXY_ADDRESS_FORWARDING=true
+  nginx:
+    image: ernsheong/keycloak-nginx
+    container_name: nginx
