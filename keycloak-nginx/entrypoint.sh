@@ -1,18 +1,9 @@
 #!/bin/bash
 
-if [ $KEYCLOAK_HOST ] \
-    && [ $KEYCLOAK_PORT ] \
-    && [ $REVERSE_PROXY_PORT ]; then
-
+if [ $KEYCLOAK_HOST ] && [ $KEYCLOAK_PORT ]; then
     # inject variables
     sed -i s/__KEYCLOAK_HOST__/$KEYCLOAK_HOST/g /etc/nginx/conf.d/keycloak.conf
     sed -i s/__KEYCLOAK_PORT__/$KEYCLOAK_PORT/g /etc/nginx/conf.d/keycloak.conf
-    sed -i s/__REVERSE_PROXY_PORT__/$REVERSE_PROXY_PORT/g /etc/nginx/conf.d/keycloak.conf
-    if [ $REVERSE_PROXY_PORT == 443 ]; then
-        sed -i s/__REVERSE_PROXY_PORT_FOR_HOST__//g /etc/nginx/conf.d/keycloak.conf
-    else
-        sed -i s/__REVERSE_PROXY_PORT_FOR_HOST__/:$REVERSE_PROXY_PORT/g /etc/nginx/conf.d/keycloak.conf
-    fi
 
     # if no ssl certificate is provided, create a self-signed certificate and use this
     if [ ! -e /etc/nginx/ssl/cert.pem ]; then
