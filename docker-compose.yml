@@ -9,7 +9,7 @@ volumes:
 
 services:
   keycloak:
-    image: ernsheong/keycloak-postgres
+    image: jboss/keycloak-postgres
     container_name: keycloak
     networks:
       - keycloak-network
@@ -20,6 +20,19 @@ services:
       - POSTGRES_USER=keycloak
       - POSTGRES_PASSWORD=keycloak
       - PROXY_ADDRESS_FORWARDING=true
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
   nginx:
     image: ernsheong/keycloak-nginx
     container_name: nginx
+    networks:
+      - keycloak-network
+    depends_on:
+      - keycloak
+    volumes:
+      - keycloak-nginx-ssl:/etc/nginx/ssl
+    environment:
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
+    ports:
+      - "443:443"
