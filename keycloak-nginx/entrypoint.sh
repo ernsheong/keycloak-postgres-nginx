@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ $KEYCLOAK_HOST ] && [ $KEYCLOAK_PORT ]; then
     # inject variables
