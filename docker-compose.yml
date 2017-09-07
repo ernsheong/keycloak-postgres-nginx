@@ -50,5 +50,6 @@ services:
     environment:
       - KEYCLOAK_HOST=keycloak
       - KEYCLOAK_PORT=8080
+      - KEYCLOAK_DOMAIN=www.example.com
     ports:
       - "443:443"
