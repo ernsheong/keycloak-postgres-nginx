@@ -41,7 +41,7 @@ services:
       - POSTGRES_PORT_5432_TCP_PORT=5432
     restart: unless-stopped
   nginx:
-    image: ernsheong/keycloak-nginx-self-signed
+    image: ernsheong/keycloak-nginx-lets-encrypt
     container_name: nginx
     networks:
       - keycloak-network
@@ -53,6 +53,9 @@ services:
       - KEYCLOAK_HOST=keycloak
       - KEYCLOAK_PORT=8080
       - KEYCLOAK_DOMAIN=www.example.com
+      - LE_EMAIL=admin@example.com
+      # Safe default to avoid LE's rate-limit
+      - LE_OPTIONS=--staging
     ports:
       - "443:443"
     restart: unless-stopped
