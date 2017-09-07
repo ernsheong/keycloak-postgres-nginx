@@ -20,7 +20,7 @@ services:
       - POSTGRES_USER=keycloak
       - POSTGRES_PASSWORD=password
   keycloak:
-    image: jboss/keycloak-postgres
+    image: ernsheong/keycloak-postgres
     container_name: keycloak
     links:
       - postgres
