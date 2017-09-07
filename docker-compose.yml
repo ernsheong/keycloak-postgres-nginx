@@ -35,7 +35,6 @@ services:
       - PROXY_ADDRESS_FORWARDING=true
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
-      - POSTGRES_JDBC_VERSION=42.1.4
       # JBoss is using legacy linking environment variables
       - POSTGRES_PORT_5432_TCP_ADDR=postgres
       - POSTGRES_PORT_5432_TCP_PORT=5432
