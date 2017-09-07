@@ -19,6 +19,7 @@ services:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
       - POSTGRES_PASSWORD=password
+    restart: unless-stopped
   keycloak:
     image: ernsheong/keycloak-postgres
     container_name: keycloak
@@ -38,6 +39,7 @@ services:
       # JBoss is using legacy linking environment variables
       - POSTGRES_PORT_5432_TCP_ADDR=postgres
       - POSTGRES_PORT_5432_TCP_PORT=5432
+    restart: unless-stopped
   nginx:
     image: ernsheong/keycloak-nginx
     container_name: nginx
@@ -53,3 +55,4 @@ services:
       - KEYCLOAK_DOMAIN=www.example.com
     ports:
       - "443:443"
+    restart: unless-stopped
