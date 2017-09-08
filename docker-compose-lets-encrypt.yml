@@ -18,7 +18,7 @@ services:
     environment:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD
     restart: unless-stopped
   keycloak:
     image: jboss/keycloak-postgres
@@ -32,10 +32,10 @@ services:
     environment:
       - POSTGRES_DATABASE=keycloak
       - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD
       - PROXY_ADDRESS_FORWARDING=true
       - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_PASSWORD
       # JBoss is using legacy linking environment variables
       - POSTGRES_PORT_5432_TCP_ADDR=postgres
       - POSTGRES_PORT_5432_TCP_PORT=5432
@@ -52,11 +52,10 @@ services:
     environment:
       - KEYCLOAK_HOST=keycloak
       - KEYCLOAK_PORT=8080
-      - KEYCLOAK_DOMAIN=www.example.com
-      - LE_EMAIL=admin@example.com
-      # Safe defaults for LE, MODIFY IN PRODUCTION
-      - LE_OPTIONS=--staging
-      - LE_RENEW_OPTIONS=--dry-run --no-self-upgrade
+      - KEYCLOAK_DOMAIN
+      - LE_EMAIL
+      - LE_OPTIONS
+      - LE_RENEW_OPTIONS
     ports:
       - "443:443"
     restart: unless-stopped
