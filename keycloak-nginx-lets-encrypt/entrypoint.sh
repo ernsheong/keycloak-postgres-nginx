@@ -12,8 +12,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
 
     certbot certonly -n "${LE_OPTIONS}" \
         --agree-tos --email "${LE_EMAIL}" \
-        --webroot -w /usr/share/nginx/html -d $KEYCLOAK_DOMAIN \
-        --post-hook="nginx -s reload"
+        --webroot -w /usr/share/nginx/html -d $KEYCLOAK_DOMAIN
 
     # Start nginx
     nginx -g "daemon off;"
