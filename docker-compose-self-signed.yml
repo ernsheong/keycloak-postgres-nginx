@@ -21,7 +21,7 @@ services:
       - POSTGRES_PASSWORD=password
     restart: unless-stopped
   keycloak:
-    image: ernsheong/keycloak-postgres
+    image: jboss/keycloak-postgres
     container_name: keycloak
     links:
       - postgres
