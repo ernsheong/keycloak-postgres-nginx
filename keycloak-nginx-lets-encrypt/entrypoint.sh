@@ -2,13 +2,6 @@
 
 set -e
 
-function stripStartAndEndQuotes {
-    cmd="temp=\${$1%\\\"}"
-    eval export $cmd
-    temp="${temp#\"}"
-    eval export "$1=$temp"
-}
-
 # Var checks
 if [ -n "$KEYCLOAK_HOST" ] && \
     [ -n "$KEYCLOAK_PORT" ] && \
@@ -20,9 +13,9 @@ if [ -n "$KEYCLOAK_HOST" ] && \
     sed -i s/__KEYCLOAK_DOMAIN__/$KEYCLOAK_DOMAIN/g /etc/nginx/conf.d/keycloak.conf
 
     # https://github.com/docker/compose/issues/2854 :(
-    # See https://stackoverflow.com/questions/9733338/shell-script-remove-first-and-last-quote-from-a-variable for code
-    stripStartAndEndQuotes "LE_OPTIONS"
-    stripStartAndEndQuotes "LE_RENEW_OPTIONS"
+    # See https://stackoverflow.com/a/24358387/1161743
+    LE_OPTIONS=$(eval echo $LE_OPTIONS)
+    LE_RENEW_OPTIONS=$(eval echo $LE_RENEW_OPTIONS)
 
     # Disable Keycloak config first as cert not present.
     mv -v /etc/nginx/conf.d/keycloak.conf /etc/nginx/conf.d/keycloak.conf.disabled
