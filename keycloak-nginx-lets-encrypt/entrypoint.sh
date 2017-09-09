@@ -10,7 +10,9 @@ if [ -n "$KEYCLOAK_HOST" ] && \
     # Inject variables
     sed -i s/__KEYCLOAK_HOST__/$KEYCLOAK_HOST/g /etc/nginx/conf.d/keycloak.conf
     sed -i s/__KEYCLOAK_PORT__/$KEYCLOAK_PORT/g /etc/nginx/conf.d/keycloak.conf
+
     sed -i s/__KEYCLOAK_DOMAIN__/$KEYCLOAK_DOMAIN/g /etc/nginx/conf.d/keycloak.conf
+    sed -i s/__KEYCLOAK_DOMAIN__/$KEYCLOAK_DOMAIN/g /etc/nginx/conf.d/le.conf
 
     # https://github.com/docker/compose/issues/2854 :(
     # See https://stackoverflow.com/a/24358387/1161743
