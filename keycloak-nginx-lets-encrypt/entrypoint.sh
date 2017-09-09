@@ -1,10 +1,12 @@
 #!/bin/sh
 
+set -e
+
 function stripStartAndEndQuotes {
     cmd="temp=\${$1%\\\"}"
-    eval echo $cmd > /dev/null 2>&1
+    eval export $cmd
     temp="${temp#\"}"
-    eval echo "$1=$temp" > /dev/null 2>&1
+    eval export "$1=$temp"
 }
 
 # Var checks
