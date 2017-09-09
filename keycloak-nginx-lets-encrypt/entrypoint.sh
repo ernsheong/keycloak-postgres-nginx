@@ -35,7 +35,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
         # Enable Keycloak config
         mv -v /etc/nginx/conf.d/keycloak.conf.disabled /etc/nginx/conf.d/keycloak.conf
 
-        echo "Reloading Nginx with SSL..."
+        echo "Reloading NGINX with SSL..."
         nginx -s reload
 
         # Install crontab for cert renewal
@@ -46,6 +46,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
     ) &
 
     # Start nginx
+    echo "Starting NGINX..."
     nginx -g "daemon off;"
 else
     echo "ERROR: please provide KEYCLOAK_HOST, KEYCLOAK_PORT, KEYCLOAK_DOMAIN, LE_EMAIL"
