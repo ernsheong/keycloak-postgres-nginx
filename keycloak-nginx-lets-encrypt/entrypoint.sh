@@ -22,14 +22,27 @@ if [ -n "$KEYCLOAK_HOST" ] && \
     stripStartAndEndQuotes "LE_OPTIONS"
     stripStartAndEndQuotes "LE_RENEW_OPTIONS"
 
-    certbot certonly -n "${LE_OPTIONS}" \
-        --agree-tos --email "${LE_EMAIL}" \
-        --webroot -w /usr/share/nginx/html -d $KEYCLOAK_DOMAIN
+    # Disable Keycloak config first as cert not present.
+    mv -v /etc/nginx/conf.d/keycloak.conf /etc/nginx/conf.d/keycloak.conf.disabled
 
     # Start nginx
     nginx -g "daemon off;"
 
-    # Install certificate renewing crontab
+    # Give nginx time to start
+    sleep 5
+
+    echo "Starting Let's Encrypt certificate install..."
+    certbot certonly -n "${LE_OPTIONS}" \
+        --agree-tos --email "${LE_EMAIL}" \
+        --webroot -w /usr/share/nginx/html -d $KEYCLOAK_DOMAIN
+
+    # Enable Keycloak config
+    mv -v /etc/nginx/conf.d/keycloak.conf.disabled /etc/nginx/conf.d/keycloak.conf
+
+    echo "Reloading Nginx with SSL..."
+    nginx -s reload
+
+    # Install crontab for cert renewal
     touch crontab.tmp \
         && echo "37 2 * * * certbot renew ${LE_RENEW_OPTIONS}" > crontab.tmp \
         && crontab crontab.tmp \

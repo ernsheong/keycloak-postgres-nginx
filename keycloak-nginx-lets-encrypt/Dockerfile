@@ -4,7 +4,8 @@ MAINTAINER Jonathan Lin <ernsheong@gmail.com>
 
 # Nginx configuration
 RUN rm -rf /etc/nginx/conf.d/*
-ADD keycloak.conf /etc/nginx/conf.d/keycloak.conf
+COPY keycloak.conf /etc/nginx/conf.d/keycloak.conf
+COPY le.conf /etc/nginx/conf.d/le.conf
 
 # Install certbot
 RUN apk update && apk add --no-cache certbot
@@ -14,6 +15,6 @@ RUN mkdir -p /etc/letsencrypt
 VOLUME /etc/letsencrypt
 
 # Copy entrypoint.sh
-ADD entrypoint.sh /custom/entrypoint.sh
+COPY entrypoint.sh /custom/entrypoint.sh
 
 CMD ["/custom/entrypoint.sh"]
