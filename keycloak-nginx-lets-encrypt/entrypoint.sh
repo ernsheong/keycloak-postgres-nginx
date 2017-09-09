@@ -14,6 +14,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
 
     # https://github.com/docker/compose/issues/2854 :(
     # See https://stackoverflow.com/a/24358387/1161743
+    # Strip literal quotes in variable value
     LE_OPTIONS=$(eval echo $LE_OPTIONS)
     LE_RENEW_OPTIONS=$(eval echo $LE_RENEW_OPTIONS)
 
