@@ -5,7 +5,7 @@ networks:
 
 volumes:
     keycloak-postgres-data:
-    keycloak-nginx-ssl:
+    keycloak-nginx-letsencrypt-ssl:
 
 services:
   postgres:
@@ -48,7 +48,7 @@ services:
     depends_on:
       - keycloak
     volumes:
-      - keycloak-nginx-ssl:/etc/letsencrypt
+      - keycloak-nginx-letsencrypt-ssl:/etc/letsencrypt
     environment:
       - KEYCLOAK_HOST=keycloak
       - KEYCLOAK_PORT=8080
