@@ -19,6 +19,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
     # Strip literal quotes in variable value
     LE_OPTIONS=$(eval echo $LE_OPTIONS)
     LE_RENEW_OPTIONS=$(eval echo $LE_RENEW_OPTIONS)
+    CRON_COMMANDS=$(eval echo $CRON_COMMANDS)
 
     # Disable Keycloak config first as cert not present.
     mv -v /etc/nginx/conf.d/keycloak.conf /etc/nginx/conf.d/keycloak.conf.disabled
@@ -40,7 +41,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
 
         # Install crontab for cert renewal
         touch crontab.tmp \
-            && echo "37 2 * * * certbot renew ${LE_RENEW_OPTIONS}" > crontab.tmp \
+            && echo "37 2 * * * certbot renew ${LE_RENEW_OPTIONS} ${CRON_COMMANDS} > /dev/null 2>&1" > crontab.tmp \
             && crontab crontab.tmp \
             && rm -rf crontab.tmp
     ) &
