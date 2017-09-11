@@ -19,7 +19,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
     # Strip literal quotes in variable value
     LE_OPTIONS=$(eval echo $LE_OPTIONS)
     LE_RENEW_OPTIONS=$(eval echo $LE_RENEW_OPTIONS)
-    CRON_COMMANDS=$(eval echo $CRON_COMMANDS)
+    LE_RENEW_CRON_COMMAND=$(eval echo $LE_RENEW_CRON_COMMAND)
 
     # Disable Keycloak config first as cert not present.
     mv -v /etc/nginx/conf.d/keycloak.conf /etc/nginx/conf.d/keycloak.conf.disabled
