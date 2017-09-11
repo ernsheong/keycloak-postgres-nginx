@@ -41,7 +41,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
 
         # Install crontab for cert renewal
         touch crontab.tmp \
-            && echo "37 2 * * * certbot renew ${LE_RENEW_OPTIONS} ${CRON_COMMANDS} > /dev/null 2>&1" > crontab.tmp \
+            && echo "37 2 * * * certbot renew ${LE_RENEW_OPTIONS} && ${LE_RENEW_CRON_COMMAND} > /dev/null 2>&1" > crontab.tmp \
             && crontab crontab.tmp \
             && rm -rf crontab.tmp
     ) &
