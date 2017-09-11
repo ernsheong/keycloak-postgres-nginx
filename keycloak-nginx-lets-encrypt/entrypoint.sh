@@ -30,6 +30,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
 
         echo "Starting Let's Encrypt certificate install..."
         certbot certonly -n "${LE_OPTIONS}" \
+            --keep-until-expiring \
             --agree-tos --email "${LE_EMAIL}" \
             --webroot -w /usr/share/nginx/html -d $KEYCLOAK_DOMAIN
 
