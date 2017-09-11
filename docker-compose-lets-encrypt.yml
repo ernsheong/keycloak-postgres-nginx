@@ -56,7 +56,7 @@ services:
       - LE_EMAIL
       - LE_OPTIONS
       - LE_RENEW_OPTIONS
-      - CRON_COMMANDS
+      - LE_RENEW_CRON_COMMAND
     ports:
       - "80:80"
       - "443:443"
