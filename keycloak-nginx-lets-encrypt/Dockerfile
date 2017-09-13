@@ -8,7 +8,8 @@ COPY keycloak.conf /etc/nginx/conf.d/keycloak.conf
 COPY le.conf /etc/nginx/conf.d/le.conf
 
 # Install certbot
-RUN apk update && apk add --no-cache certbot
+RUN apk update && \
+  apk add --no-cache certbot curl
 
 # SSL configuration for Let's Encrypt
 RUN mkdir -p /etc/letsencrypt
