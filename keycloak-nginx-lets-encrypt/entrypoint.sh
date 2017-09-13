@@ -44,6 +44,9 @@ if [ -n "$KEYCLOAK_HOST" ] && \
             && echo "37 2 * * * certbot renew ${LE_RENEW_OPTIONS} --post-hook 'nginx -s reload' && ${LE_RENEW_CRON_COMMAND} >> /var/log/cron.log 2>&1" > crontab.tmp \
             && crontab crontab.tmp \
             && rm crontab.tmp
+
+        # Start crond
+        /usr/sbin/crond -f
     ) &
 
     # Start nginx
