@@ -46,7 +46,7 @@ if [ -n "$KEYCLOAK_HOST" ] && \
             && rm crontab.tmp
 
         # Start crond
-        /usr/sbin/crond -f
+        /usr/sbin/crond
     ) &
 
     # Start nginx
