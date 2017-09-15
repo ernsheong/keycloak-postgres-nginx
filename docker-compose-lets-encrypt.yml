@@ -21,7 +21,7 @@ services:
       - POSTGRES_PASSWORD
     logging:
       options:
-        max-size: 50m
+        max-size: "50m"
         max-file: 3
     restart: unless-stopped
   keycloak:
@@ -46,7 +46,7 @@ services:
       - KEYCLOAK_VERSION
     logging:
       options:
-        max-size: 50m
+        max-size: "50m"
         max-file: 3
     restart: unless-stopped
   nginx:
@@ -68,7 +68,7 @@ services:
       - LE_RENEW_CRON_COMMAND
     logging:
       options:
-        max-size: 50m
+        max-size: "50m"
         max-file: 3
     ports:
       - "80:80"
