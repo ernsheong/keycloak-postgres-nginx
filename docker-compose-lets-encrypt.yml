@@ -22,7 +22,7 @@ services:
     logging:
       options:
         max-size: "50m"
-        max-file: 3
+        max-file: "3"
     restart: unless-stopped
   keycloak:
     image: "jboss/keycloak-postgres:${KEYCLOAK_VERSION}"
@@ -47,7 +47,7 @@ services:
     logging:
       options:
         max-size: "50m"
-        max-file: 3
+        max-file: "3"
     restart: unless-stopped
   nginx:
     image: ernsheong/keycloak-nginx-lets-encrypt
@@ -69,7 +69,7 @@ services:
     logging:
       options:
         max-size: "50m"
-        max-file: 3
+        max-file: "3"
     ports:
       - "80:80"
       - "443:443"
