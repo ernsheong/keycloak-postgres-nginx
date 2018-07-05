@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3'
 
 networks:
   keycloak-network:
@@ -18,10 +18,10 @@ services:
     environment:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=$KEYCLOAK_PASSWORD
     restart: unless-stopped
   keycloak:
-    image: jboss/keycloak-postgres
+    image: "jboss/keycloak-postgres:${KEYCLOAK_VERSION}"
     container_name: keycloak
     links:
       - postgres
@@ -32,7 +32,7 @@ services:
     environment:
       - POSTGRES_DATABASE=keycloak
       - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=$KEYCLOAK_PASSWORD
       - PROXY_ADDRESS_FORWARDING=true
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
@@ -52,7 +52,7 @@ services:
     environment:
       - KEYCLOAK_HOST=keycloak
       - KEYCLOAK_PORT=8080
-      - KEYCLOAK_DOMAIN=www.example.com
+      - KEYCLOAK_DOMAIN=$KEYCLOAK_DOMAIN
     ports:
       - "443:443"
     restart: unless-stopped

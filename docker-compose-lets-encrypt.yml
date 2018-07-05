@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3'
 
 networks:
   keycloak-network:
@@ -18,11 +18,7 @@ services:
     environment:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD
-    logging:
-      options:
-        max-size: "50m"
-        max-file: "3"
+      - POSTGRES_PASSWORD=$KEYCLOAK_PASSWORD
     restart: unless-stopped
   keycloak:
     image: "jboss/keycloak-postgres:${KEYCLOAK_VERSION}"
@@ -36,18 +32,14 @@ services:
     environment:
       - POSTGRES_DATABASE=keycloak
       - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD
+      - POSTGRES_PASSWORD=$KEYCLOAK_PASSWORD
       - PROXY_ADDRESS_FORWARDING=true
       - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD
+      - KEYCLOAK_PASSWORD=$KEYCLOAK_PASSWORD
       # JBoss is using legacy linking environment variables
       - POSTGRES_PORT_5432_TCP_ADDR=postgres
       - POSTGRES_PORT_5432_TCP_PORT=5432
       - KEYCLOAK_VERSION
-    logging:
-      options:
-        max-size: "50m"
-        max-file: "3"
     restart: unless-stopped
   nginx:
     image: ernsheong/keycloak-nginx-lets-encrypt
@@ -66,10 +58,6 @@ services:
       - LE_OPTIONS
       - LE_RENEW_OPTIONS
       - LE_RENEW_CRON_COMMAND
-    logging:
-      options:
-        max-size: "50m"
-        max-file: "3"
     ports:
       - "80:80"
       - "443:443"
