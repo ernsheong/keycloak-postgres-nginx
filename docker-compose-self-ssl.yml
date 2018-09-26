@@ -41,7 +41,7 @@ services:
       - POSTGRES_PORT_5432_TCP_PORT=5432
     restart: unless-stopped
   nginx:
-    image: ernsheong/keycloak-nginx-self-signed
+    image: ernsheong/keycloak-nginx-self-ssl
     container_name: nginx
     networks:
       - keycloak-network
